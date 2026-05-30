@@ -1,0 +1,329 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-[#f5f5f3] text-zinc-950 antialiased;
+  font-feature-settings: 'ss01' on, 'cv01' on;
+}
+
+:focus-visible {
+  outline: 2px solid #18181b;
+  outline-offset: 3px;
+}
+
+.page-snap-container {
+  scroll-snap-type: y proximity;
+}
+
+.snap-section {
+  isolation: isolate;
+  min-height: 100svh;
+  scroll-margin-top: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.sticky-section {
+  position: sticky;
+  top: 0;
+}
+
+.hero-product {
+  animation: heroProductScale linear both;
+  animation-timeline: scroll();
+  animation-range: 0 90vh;
+}
+
+.hero-video-drift {
+  animation: heroVideoDrift linear both;
+  animation-timeline: scroll();
+  animation-range: 0 115vh;
+}
+
+.hero-video {
+  animation: heroVideoMorph linear both;
+  animation-timeline: scroll();
+  animation-range: 0 115vh;
+}
+
+.hero-video-fallback {
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-scroll-hint {
+  animation: scrollHintPulse 1.8s ease-in-out infinite;
+}
+
+.hero-copy {
+  animation: heroCopyFade linear both;
+  animation-timeline: scroll();
+  animation-range: 0 95vh;
+}
+
+.intro-line {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(calc(-50% + 40px));
+}
+
+.intro-line-1 {
+  animation: introLineOne linear both;
+  animation-timeline: view();
+}
+
+.intro-line-2 {
+  animation: introLineTwo linear both;
+  animation-timeline: view();
+}
+
+.intro-line-3 {
+  animation: introLineThree linear both;
+  animation-timeline: view();
+}
+
+.feature-card {
+  opacity: 0;
+  transform: translateX(72px);
+  transform-origin: center top;
+}
+
+.feature-card-1 {
+  animation: flipCardOne linear both;
+  animation-timeline: view();
+}
+
+.feature-card-2 {
+  animation: flipCardTwo linear both;
+  animation-timeline: view();
+}
+
+.feature-card-3 {
+  animation: flipCardThree linear both;
+  animation-timeline: view();
+}
+
+.trailer-frame {
+  animation: trailerReveal linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 45%;
+}
+
+.story-progress::after {
+  animation: progressDrop linear both;
+  animation-timeline: view();
+  background: white;
+  border-radius: 999px;
+  content: '';
+  height: 45%;
+  left: -1.5px;
+  position: absolute;
+  top: 0;
+  width: 4px;
+}
+
+@keyframes heroVideoDrift {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10vh) scale(0.92);
+  }
+  100% {
+    opacity: 0.42;
+    transform: translateY(-22vh) scale(0.84);
+  }
+}
+
+@keyframes heroVideoMorph {
+  0% {
+    filter: saturate(1) contrast(1);
+  }
+  50% {
+    filter: saturate(1.03) contrast(1.02);
+  }
+  100% {
+    filter: saturate(0.94) contrast(1.06);
+  }
+}
+
+@keyframes scrollHintPulse {
+  0%, 100% { opacity: 0.42; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.9; transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes progressDrop {
+  from { transform: translateY(0); }
+  to { transform: translateY(140%); }
+}
+
+@keyframes heroProductScale {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  to {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+}
+
+@keyframes heroCopyFade {
+  0%, 58% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-42px);
+  }
+}
+
+@keyframes introLineOne {
+  0%, 8% { opacity: 0; transform: translateX(48px) translateY(-50%); }
+  16%, 28% { opacity: 1; transform: translateX(0) translateY(-50%); }
+  38%, 100% { opacity: 0; transform: translateX(-48px) translateY(-50%); }
+}
+
+@keyframes introLineTwo {
+  0%, 30% { opacity: 0; transform: translateX(48px) translateY(-50%); }
+  42%, 56% { opacity: 1; transform: translateX(0) translateY(-50%); }
+  66%, 100% { opacity: 0; transform: translateX(-48px) translateY(-50%); }
+}
+
+@keyframes introLineThree {
+  0%, 62% { opacity: 0; transform: translateX(48px) translateY(-50%); }
+  76%, 100% { opacity: 1; transform: translateX(0) translateY(-50%); }
+}
+
+@keyframes flipCardOne {
+  0%, 6% { opacity: 0; transform: translateX(72px); }
+  12%, 26% { opacity: 1; transform: translateX(0); }
+  34%, 100% { opacity: 0; transform: translateX(-72px); }
+}
+
+@keyframes flipCardTwo {
+  0%, 30% { opacity: 0; transform: translateX(72px); }
+  40%, 56% { opacity: 1; transform: translateX(0); }
+  66%, 100% { opacity: 0; transform: translateX(-72px); }
+}
+
+@keyframes flipCardThree {
+  0%, 62% { opacity: 0; transform: translateX(72px); }
+  74%, 100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes trailerReveal {
+  from {
+    border-radius: 48px;
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    border-radius: 24px;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .hero-product,
+  .hero-video-drift,
+  .hero-video,
+  .hero-copy,
+  .intro-line,
+  .feature-card,
+  .trailer-frame {
+    animation: none;
+  }
+
+  .hero-video-drift {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-line,
+  .feature-card {
+    opacity: 1;
+    position: relative;
+    top: auto;
+    transform: none;
+  }
+
+  .intro-line + .intro-line {
+    margin-top: 2rem;
+  }
+
+  .feature-stage {
+    display: grid;
+    gap: 1rem;
+    height: auto !important;
+  }
+
+  .feature-card {
+    position: relative;
+  }
+}
+
+@supports not (height: 100svh) {
+  .snap-section {
+    min-height: 100vh;
+  }
+}
+
+@supports not (position: sticky) {
+  .sticky-section {
+    position: relative;
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 64px;
+  }
+
+  .page-snap-container {
+    scroll-snap-type: y proximity;
+  }
+
+  .snap-section {
+    scroll-margin-top: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-snap-container {
+    scroll-snap-type: none;
+  }
+
+  .sticky-section {
+    position: relative;
+  }
+}
